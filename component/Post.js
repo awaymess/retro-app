@@ -120,7 +120,7 @@ export default function Post() {
       text-transform: capitalize;
       font-size: 16px;
       color: rgb(0, 162, 255);
-      opacity: 0.5;
+      // opacity: 0.5;
   }
   
   .reaction-wrapper{

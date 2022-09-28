@@ -41,6 +41,9 @@ export default function Layout({ children }) {
         main,html{
           background:#f1f1f1;
         }
+        p {
+          margin-bottom: 0px;
+        }
           .sidebar {
             margin: 0;
             // padding: 0;
@@ -77,9 +80,9 @@ export default function Layout({ children }) {
         
           .sidebarright {
             // margin: 0;
-            margin-left: 80%;
+            margin-left: 75%;
             // padding: 0;
-            width: 20%;
+            width: 24%;
             background-color: #f1f1f1;
             position: fixed;
             height: 100%;
@@ -142,9 +145,64 @@ export default function Layout({ children }) {
             padding-top: 0px;
             width : 472px;
             margin: auto;
-
-
           }
+
+
+
+          .profile-card{
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .profile-card .profile-pic{
+            flex: 0 0 auto;
+            padding: 0;
+            background: none;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .profile-card:first-child .profile-pic{
+            width: 56px;
+            height: 56px;
+        }
+        
+        .profile-card .profile-pic .Image{
+            border: none;
+        }
+        
+        .profile-card .username{
+            font-weight: 500;
+            font-size: 14px;
+            color: #000;
+        }
+        
+        .sub-text{
+            color: rgba(0, 0, 0, 0.5);
+            font-size:12px;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .action-btn{
+            opacity: 1;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        .suggestion-text{
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+
+        
           @media screen and (max-width: 700px) {
             .sidebarright {
               display:none;
@@ -319,7 +377,7 @@ export default function Layout({ children }) {
           {/* <a className="active" href="#home">
             Home
           </a> */}
-          <a className="active" href="#contact">
+          {/* <a className="active" href="#contact">
             <i className="bi bi-x-lg" />
             <span className="hiddentext">Home</span>
           </a>
@@ -334,7 +392,42 @@ export default function Layout({ children }) {
           <a href="#contact">
             <i className="bi bi-x-lg" />
             <span className="hiddentext">Contact</span>
-          </a>
+          </a> */}
+
+          <div class="wrapper">
+            <div class="right-col">
+              <div class="profile-card">
+                <div class="profile-pic">
+                  <Image
+                    src={logo}
+                    alt="Picture of the author"
+                    placeholder="blur"
+                  />
+                </div>
+                <div>
+                  <p class="username">modern_web_channel</p>
+                  <p class="sub-text">kunaal kumar</p>
+                </div>
+                <button class="action-btn">switch</button>
+              </div>
+              <p class="suggestion-text">Suggestions for you</p>
+              <div class="profile-card">
+                <div class="profile-pic">
+                  <Image
+                    src={logo}
+                    alt="Picture of the author"
+                    placeholder="blur"
+                  />
+                </div>
+
+                <div>
+                  <p class="username">modern_web_channel</p>
+                  <p class="sub-text">followed bu user</p>
+                </div>
+                <button class="action-btn">follow</button>
+              </div>
+            </div>
+          </div>
           <p>© 2022 INSTAGRAM FROM WINTER</p>
         </div>
 
