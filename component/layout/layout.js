@@ -259,87 +259,117 @@ export default function Layout({ children }) {
       </style>
 
       <main>
-        <navber />
         <div className="sidebar ">
           {/* <a className="active" href="#home">
             Home
           </a> */}
-          <div className="hiddenitem">
-            <a href="#contact">
-              <Image
-                src={logofull}
-                alt="Picture of the author"
-                width="100%"
-                height="38px"
-                placeholder="blur"
-              />
+          <Link href={"/"}>
+            <div className="hiddenitem">
+              <a href="/">
+                <Image
+                  src={logofull}
+                  alt="Picture of the author"
+                  width="100%"
+                  height="38px"
+                  placeholder="blur"
+                />
+              </a>
+            </div>
+          </Link>
+
+          <Link href={"/index2"}>
+            <div className="hiddenitemfull">
+              <a>
+                <Image
+                  src={logo}
+                  alt="Picture of the author"
+                  width="35px"
+                  height="35px"
+                  placeholder="blur"
+                />
+              </a>
+            </div>
+          </Link>
+
+          <Link href={"/"}>
+            <a className={router.pathname == "/" ? "active" : ""}>
+              <i className="bi bi-house"></i>
+              <span className="hiddentext"> Home</span>
             </a>
-          </div>
-
-          <div className="hiddenitemfull">
-            <a href="#contact">
-              <Image
-                src={logo}
-                alt="Picture of the author"
-                width="35px"
-                height="35px"
-                placeholder="blur"
-              />
+          </Link>
+          <Link href={"/Search"}>
+            <a className={router.pathname == "/Search" ? "active" : ""}>
+              <i className="bi bi-search" />
+              <span className="hiddentext"> Search</span>
             </a>
-          </div>
+          </Link>
+          <Link href={"/Contact"}>
+            <a className={router.pathname == "/Contact" ? "active" : ""}>
+              <i className="bi bi-plus-square" />
+              <span className="hiddentext"> Contact</span>
+            </a>
+          </Link>
+          <Link href={"/Notification"}>
+            <a
+              className={
+                router.pathname == "/Notification"
+                  ? "active hiddenitem"
+                  : "hiddenitem"
+              }
+            >
+              <i className="bi bi-heart" />
+              <span className="hiddentext"> Notification</span>
+            </a>
+          </Link>
 
-          <a className="active" href="#contact">
-            <i className="bi bi-house"></i>
-            <span className="hiddentext"> Home</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-search" />
-            <span className="hiddentext"> Search</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-plus-square" />
-            <span className="hiddentext"> Contact</span>
-          </a>
-          <a href="#contact" className="hiddenitem">
-            <i className="bi bi-heart" />
-            <span className="hiddentext"> Notification</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-chat" />
-            <span className="hiddentext"> Direct</span>
-          </a>
-
-          <a href="#contact">
-            <i className="bi bi-person" />
-            <span className="hiddentext"> Profile</span>
-          </a>
+          <Link href={"/Direct"}>
+            <a className={router.pathname == "/Direct" ? "active" : ""}>
+              <i className="bi bi-chat" />
+              <span className="hiddentext"> Direct</span>
+            </a>
+          </Link>
+          <Link href={"/Profile"}>
+            <a className={router.pathname == "/" ? "Profile" : ""}>
+              <i className="bi bi-person" />
+              <span className="hiddentext"> Profile</span>
+            </a>
+          </Link>
         </div>
 
         <div className="sidebarright ">
           {/* <a className="active" href="#home">
             Home
           </a> */}
-          <a className="active" href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Home</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Contact</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Contact</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Contact</span>
-          </a>
+          <Link href={"/Profile"}>
+            <a className={router.pathname == "/Profile" ? "active" : ""}>
+              <i className="bi bi-person" />
+              <span className="hiddentext"> Profile</span>
+            </a>
+          </Link>
+          <Link href={"/Setting"}>
+            <a className={router.pathname == "/Setting" ? "active" : ""}>
+              <i className="bi bi-gear-wide" />
+              <span className="hiddentext"> Setting</span>
+            </a>
+          </Link>
+          <Link href={"/Bookmark"}>
+            <a className={router.pathname == "/Bookmark " ? "active" : ""}>
+              <i className="bi bi-bookmark" />
+              <span className="hiddentext"> Bookmark</span>
+            </a>
+          </Link>
+          <Link href={"/Logout"}>
+            <a className={router.pathname == "/Logout" ? "active" : ""}>
+              <i className="bi bi-box-arrow-right" />
+              <span className="hiddentext"> Logout</span>
+            </a>
+          </Link>
+
           <p>© 2022 INSTAGRAM FROM WINTER</p>
         </div>
 
         <div className="topnav">
-          <a href="#contact">
+          <a className={router.pathname == "/" ? "active" : ""}>
             <Image
               src={logofull}
               alt="Picture of the author"
@@ -349,7 +379,7 @@ export default function Layout({ children }) {
             />
           </a>
 
-          <a href="#contact" className="split">
+          <a className={router.pathname == "/" ? "active split" : "split"}>
             <i className="bi bi-heart"></i>
           </a>
         </div>

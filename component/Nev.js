@@ -244,7 +244,7 @@ export default function Nev() {
       </style>
 
       <main>
-        <navber/>
+        <navber />
         <div className="sidebar ">
           {/* <a className="active" href="#home">
             Home

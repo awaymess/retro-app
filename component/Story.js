@@ -104,6 +104,13 @@ export default function Story() {
     padding-top: 72px;
 
     }
+    Image {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+    }
   }
   `}
       </style>
@@ -115,9 +122,9 @@ export default function Story() {
                 <button type="button">
                   <div className=" status-card">
                     <div className="profile-pic">
-                      <Image src={logo} alt="" />
+                      <Image src={logo} alt="" draggable="false" />
                     </div>
-                    <p className="username pmb">user_name_1</p>
+                    <p className="username pmb ">user_name_1</p>
                   </div>
                 </button>
                 <div className="status-card">
