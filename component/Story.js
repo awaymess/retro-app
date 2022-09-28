@@ -1,10 +1,28 @@
-import React from "react";
+import * as React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import logofull from "../public/ig.png";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 
+
+
+
 export default function Story() {
+  // const sideScroll = (
+  //   element: HTMLDivElement,
+  //   speed: number,
+  //   distance: number,
+  //   step: number
+  // ) => {
+  //   let scrollAmount = 0;
+  //   const slideTimer = setInterval(() => {
+  //     element.scrollLeft += step;
+  //     scrollAmount += Math.abs(step);
+  //     if (scrollAmount >= distance) {
+  //       clearInterval(slideTimer);
+  //     }
+  //   }, speed);
+  // };
   return (
     <div>
       <Head>
