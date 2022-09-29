@@ -187,12 +187,26 @@ export default function Layout({ children }) {
             font-weight: 500;
             margin-top: 5px;
         }
-        
+
+        .comment-btn,
         .action-btn{
+            width: 70px;
+            height: 100%;
+            background: none;
+            border: none;
+            outline: none;
+            text-transform: capitalize;
+            font-size: 14px;
+            color: rgb(0, 162, 255);
+            // opacity: 0.5;
             opacity: 1;
             font-weight: 700;
-            font-size: 12px;
         }
+        
+        
+        // .action-btn{
+            
+        // }
         
         .suggestion-text{
             font-size: 14px;
@@ -395,11 +409,7 @@ export default function Layout({ children }) {
         </div>
 
         <div className="sidebarright ">
-          {/* <a className="active" href="#home">
-            Home
-          </a> */}
-<<<<<<< HEAD
-          <Link href={"/Profile"}>
+          {/* <Link href={"/Profile"}>
             <a className={router.pathname == "/Profile" ? "active" : ""}>
               <i className="bi bi-person" />
               <span className="hiddentext"> Profile</span>
@@ -422,25 +432,7 @@ export default function Layout({ children }) {
               <i className="bi bi-box-arrow-right" />
               <span className="hiddentext"> Logout</span>
             </a>
-          </Link>
-
-=======
-          {/* <a className="active" href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Home</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Contact</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Contact</span>
-          </a>
-          <a href="#contact">
-            <i className="bi bi-x-lg" />
-            <span className="hiddentext">Contact</span>
-          </a> */}
+          </Link> */}
 
           <div class="wrapper">
             <div class="right-col">
@@ -476,7 +468,6 @@ export default function Layout({ children }) {
               </div>
             </div>
           </div>
->>>>>>> 45fb560be20d7b4bfdd606234d09a22b59002eaf
           <p>© 2022 INSTAGRAM FROM WINTER</p>
         </div>
 

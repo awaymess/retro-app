@@ -110,19 +110,7 @@ export default function Post() {
       font-size: 14px;
   }
   
-  .comment-btn,
-  .action-btn{
-      width: 70px;
-      height: 100%;
-      background: none;
-      border: none;
-      outline: none;
-      text-transform: capitalize;
-      font-size: 16px;
-      color: rgb(0, 162, 255);
-      // opacity: 0.5;
-  }
-  
+
   .reaction-wrapper{
       width: 100%;
       height: 50px;
