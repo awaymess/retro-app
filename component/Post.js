@@ -110,8 +110,7 @@ export default function Post() {
       font-size: 14px;
   }
   
-  .comment-btn,
-  .action-btn{
+  .comment-btn{
       width: 70px;
       height: 100%;
       background: none;

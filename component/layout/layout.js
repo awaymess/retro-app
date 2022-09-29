@@ -187,12 +187,21 @@ export default function Layout({ children }) {
             font-weight: 500;
             margin-top: 5px;
         }
-        
+      
+
         .action-btn{
-            opacity: 1;
-            font-weight: 700;
-            font-size: 12px;
-        }
+          width: 70px;
+          height: 100%;
+          background: none;
+          border: none;
+          outline: none;
+          text-transform: capitalize;
+          font-size: 14px;
+          color: rgb(0, 162, 255);
+          font-weight: 700;
+          // opacity: 0.5;
+          opacity: 1;
+      }
         
         .suggestion-text{
             font-size: 14px;
@@ -398,33 +407,6 @@ export default function Layout({ children }) {
           {/* <a className="active" href="#home">
             Home
           </a> */}
-<<<<<<< HEAD
-          <Link href={"/Profile"}>
-            <a className={router.pathname == "/Profile" ? "active" : ""}>
-              <i className="bi bi-person" />
-              <span className="hiddentext"> Profile</span>
-            </a>
-          </Link>
-          <Link href={"/Setting"}>
-            <a className={router.pathname == "/Setting" ? "active" : ""}>
-              <i className="bi bi-gear-wide" />
-              <span className="hiddentext"> Setting</span>
-            </a>
-          </Link>
-          <Link href={"/Bookmark"}>
-            <a className={router.pathname == "/Bookmark " ? "active" : ""}>
-              <i className="bi bi-bookmark" />
-              <span className="hiddentext"> Bookmark</span>
-            </a>
-          </Link>
-          <Link href={"/Logout"}>
-            <a className={router.pathname == "/Logout" ? "active" : ""}>
-              <i className="bi bi-box-arrow-right" />
-              <span className="hiddentext"> Logout</span>
-            </a>
-          </Link>
-
-=======
           {/* <a className="active" href="#contact">
             <i className="bi bi-x-lg" />
             <span className="hiddentext">Home</span>
@@ -474,9 +456,32 @@ export default function Layout({ children }) {
                 </div>
                 <button class="action-btn">follow</button>
               </div>
+              <Link href={"/Profile"}>
+                <a className={router.pathname == "/Profile" ? "active" : ""}>
+                  <i className="bi bi-person" />
+                  <span className="hiddentext"> Profile</span>
+                </a>
+              </Link>
+              <Link href={"/Setting"}>
+                <a className={router.pathname == "/Setting" ? "active" : ""}>
+                  <i className="bi bi-gear-wide" />
+                  <span className="hiddentext"> Setting</span>
+                </a>
+              </Link>
+              <Link href={"/Bookmark"}>
+                <a className={router.pathname == "/Bookmark " ? "active" : ""}>
+                  <i className="bi bi-bookmark" />
+                  <span className="hiddentext"> Bookmark</span>
+                </a>
+              </Link>
+              <Link href={"/Logout"}>
+                <a className={router.pathname == "/Logout" ? "active" : ""}>
+                  <i className="bi bi-box-arrow-right" />
+                  <span className="hiddentext"> Logout</span>
+                </a>
+              </Link>
             </div>
           </div>
->>>>>>> 45fb560be20d7b4bfdd606234d09a22b59002eaf
           <p>© 2022 INSTAGRAM FROM WINTER</p>
         </div>
 
