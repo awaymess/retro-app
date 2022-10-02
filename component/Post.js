@@ -1,9 +1,85 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+// import styled from "styled-components";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
 
 export default function Post() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    Poster();
+    
+    // sendPostRequest();
+  }, []);
+  const Poster = async () => {
+    try {
+      const resp = await axios.get("http://localhost:4000/poster");
+      // console.log(resp.data);
+      setData(resp.data);
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+  };
+
+  const newPosts = {
+    // userId: 1,
+    // title: "A new post",
+    // body: "This is the body of the new post",
+    name: "tesrtet4",
+    like: [
+      {
+        name: "winrwe2",
+        status: 1,
+        checkinEnabled: true,
+      },
+      {
+        name: "winrwe2",
+        status: 0,
+        checkinEnabled: false,
+      },
+      {
+        name: "winrwe2",
+        status: 1,
+        checkinEnabled: true,
+      },
+      {
+        name: "winrwe2",
+        status: 0,
+        checkinEnabled: false,
+      },
+    ],
+    comments: [
+      {
+        name: "winrwe2",
+        comment: "ytestr1",
+      },
+      {
+        name: "winrwe2",
+        comment: "ytestr1",
+      },
+      {
+        name: "winrdrtghdfgfdsgwe2",
+        comment: "ytesdfgdfgdfgdfgdfgtr1",
+      },
+    ],
+  };
+
+  const sendPostRequest = async () => {
+    try {
+      const resp = await axios.post(
+        "http://localhost:4000/poster/create-poster",
+        newPosts
+      );
+      // console.log(resp.data);
+    } catch (err) {
+      // Handle Error Here
+      console.error(err);
+    }
+    Poster();
+  };
+
   return (
     <>
       <style>
@@ -144,125 +220,69 @@ export default function Post() {
 
   }`}
       </style>
-      <div className="content">
-        <div className="wrapper">
-          <div className="left-col">
-            {/* // status wrappers */}
-            <div className="post">
-              <div className="info">
-                <div className="user">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
+
+      {data.map((item, index) => (
+        
+        <div className="content" key={index}>
+          <div className="wrapper">
+            <div className="left-col">
+              {/* // status wrappers */}
+              <div className="post">
+                <div className="info">
+                  <div className="user">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" />
+                    </div>
+                    <p className="username"> {item.name}</p>
                   </div>
-                  <p className="username">modern_web_channel</p>
+                  <i className="bi bi-three-dots save icon"></i>
+
+                  {/* <img src="img/option.PNG" className="options" alt="" /> */}
                 </div>
-                <i className="bi bi-three-dots save icon"></i>
 
-                {/* <img src="img/option.PNG" className="options" alt="" /> */}
-              </div>
+                <Image src={logo} className="post-image" alt="" />
+                <div className="post-content">
+                  <div className="reaction-wrapper">
+                    <i className="bi bi-heart icon"></i>
 
-              <Image src={logo} className="post-image" alt="" />
-              <div className="post-content">
-                <div className="reaction-wrapper">
-                  <i className="bi bi-heart icon"></i>
+                    <i className="bi bi-chat icon"></i>
 
-                  <i className="bi bi-chat icon"></i>
+                    <i className="bi bi-send icon"></i>
 
-                  <i className="bi bi-send icon"></i>
+                    <i className="bi bi-bookmark save icon"></i>
 
-                  <i className="bi bi-bookmark save icon"></i>
-
-                  {/* <img src="img/like.PNG" className="icon" alt="" />
+                    {/* <img src="img/like.PNG" className="icon" alt="" />
                   <img src="img/comment.PNG" className="icon" alt="" />
                   <img src="img/send.PNG" className="icon" alt="" />
                   <img src="img/save.PNG" className="save icon" alt="" /> */}
+                  </div>
+                  <p className="likes">{item.like.length} likes</p>
+                  {item.comments.map((comment, index) => (
+                    <p className="description" key={index} >
+                      <span>{comment.name} </span>
+                      {comment.comment}
+                    </p>
+                  ))}
+                  <p className="post-time">2 minutes ago</p>
                 </div>
-                <p className="likes">1,012 likes</p>
-                <p className="description">
-                  <span>username </span> Lorem ipsum dolor sit amet consectetur,
-                  adipisicing elit. Pariatur tenetur veritatis placeat,
-                  molestiae impedit aut provident eum quo natus molestias?
-                </p>
-                <p className="post-time">2 minutes ago</p>
-              </div>
 
-              <div className="comment-wrapper">
-                {/* <Image src={logo} className="icon" alt="" /> */}
-                {/* <i className="bi bi-heart icon"></i> */}
-                <i className="ic bi bi-emoji-sunglasses"></i>
+                <div className="comment-wrapper">
+                  {/* <Image src={logo} className="icon" alt="" /> */}
+                  {/* <i className="bi bi-heart icon"></i> */}
+                  <i className="ic bi bi-emoji-sunglasses"></i>
 
-                <input
-                  type="text"
-                  className="comment-box"
-                  placeholder="Add a comment"
-                />
-                <button className="comment-btn">post</button>
+                  <input
+                    type="text"
+                    className="comment-box"
+                    placeholder="Add a comment"
+                  />
+                  <button className="comment-btn">post</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="content">
-        <div className="wrapper">
-          <div className="left-col">
-            {/* // status wrappers */}
-            <div className="post">
-              <div className="info">
-                <div className="user">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username">modern_web_channel</p>
-                </div>
-                <i className="bi bi-heart"></i>
-
-                {/* <img src="img/option.PNG" className="options" alt="" /> */}
-              </div>
-
-              <Image src={logo} className="post-image" alt="" />
-              <div className="post-content">
-                <div className="reaction-wrapper">
-                  <i className="bi bi-heart icon"></i>
-
-                  <i className="bi bi-chat icon"></i>
-
-                  <i className="bi bi-send icon"></i>
-
-                  <i className="bi bi-bookmark save icon"></i>
-
-                  {/* <img src="img/like.PNG" className="icon" alt="" />
-                  <img src="img/comment.PNG" className="icon" alt="" />
-                  <img src="img/send.PNG" className="icon" alt="" />
-                  <img src="img/save.PNG" className="save icon" alt="" /> */}
-                </div>
-                <p className="likes">1,012 likes</p>
-                <p className="description">
-                  <span>username </span> Lorem ipsum dolor sit amet consectetur,
-                  adipisicing elit. Pariatur tenetur veritatis placeat,
-                  molestiae impedit aut provident eum quo natus molestias?
-                </p>
-                <p className="post-time">2 minutes ago</p>
-              </div>
-
-              <div className="comment-wrapper">
-                {/* <Image src={logo} className="icon" alt="" /> */}
-                {/* <i className="bi bi-heart icon"></i>
-                 */}
-
-                <i className="ic bi bi-emoji-sunglasses"></i>
-
-                <input
-                  type="text"
-                  className="comment-box"
-                  placeholder="Add a comment"
-                />
-                <button className="comment-btn">post</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      ))}
     </>
   );
 }

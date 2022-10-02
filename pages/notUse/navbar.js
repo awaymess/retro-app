@@ -33,14 +33,14 @@ export default function Home() {
       </Head>
 
       <main>
-        <nav class="navbar navbar-expand-sm bg-light">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-sm bg-light">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">
               Navbar
             </a>
 
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasScrolling"
@@ -48,52 +48,52 @@ export default function Home() {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
 
             <div
-              class="offcanvas offcanvas-start"
+              className="offcanvas offcanvas-start"
               data-bs-scroll="true"
               data-bs-backdrop="false"
               tabindex="-1"
               id="offcanvasScrolling"
               aria-labelledby="offcanvasScrollingLabel"
             >
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
+              <div className="offcanvas-header">
+                <h5 className="offcanvas-title" id="offcanvasScrollingLabel">
                   Offcanvas with body scrolling
                 </h5>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="offcanvas"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="offcanvas-body">
-                <ul class="navbar-nav">
-                  {/* <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
+              <div className="offcanvas-body">
+                <ul className="navbar-nav">
+                  {/* <li className="nav-item">
+                    <a className="nav-link active" aria-current="page" href="#">
                       Home
                     </a>
                   </li> */}
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">
                       Features
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">
                       Features
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">
                       Pricing
                     </a>
                   </li>
-                  {/* <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                  {/* <li className="nav-item">
+                    <a className="nav-link disabled">Disabled</a>
                   </li> */}
                 </ul>
               </div>

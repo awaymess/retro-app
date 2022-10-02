@@ -115,8 +115,8 @@ export default function Home() {
         `}
       </style>
       <main className={styles.main}>
-        {/* <div class="row justify-content-center">
-          <div class="col-12 box">
+        {/* <div className="row justify-content-center">
+          <div className="col-12 box">
             
             <img
               src="https://user-images.githubusercontent.com/12670730/113008567-6ebdcb80-9177-11eb-91bd-6863196d9cd3.png"
@@ -124,19 +124,19 @@ export default function Home() {
               width="200px"
             />
           </div>
-          <div class="col-12 box2"></div>
+          <div className="col-12 box2"></div>
         </div> */}
 
-        {/* <div class="row justify-content-center">
-          <div class="col-7 box">
+        {/* <div className="row justify-content-center">
+          <div className="col-7 box">
             RegisterRegisterRegisterRegisterRegisterRegisterRegisterRegisterRegister
           </div>
         </div> */}
 
-        <div class="row">
-          <div class="col-12 ">
-            <div class="row justify-content-evenly">
-              <div class="col-6 ">
+        <div className="row">
+          <div className="col-12 ">
+            <div className="row justify-content-evenly">
+              <div className="col-6 ">
                 <button
                   type="button"
                   className="loginbnt"
@@ -146,7 +146,7 @@ export default function Home() {
                   Login
                 </button>
               </div>
-              <div class="col-6">
+              <div className="col-6">
                 <button
                   type="button"
                   className="loginbnt"
@@ -160,13 +160,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* <div class="container text-center">
-          <div class="row justify-content-md-center">
+        {/* <div className="container text-center">
+          <div className="row justify-content-md-center">
             <div className="col-10">
-              <div class="row justify-content-md-center ">
-                <div class="col col-lg-2 loginbnt">1 of 3</div>
-                <div class="col-md-auto loginbnt">Variable width content</div>
-                <div class="col col-lg-2 loginbnt">3 of 3</div>
+              <div className="row justify-content-md-center ">
+                <div className="col col-lg-2 loginbnt">1 of 3</div>
+                <div className="col-md-auto loginbnt">Variable width content</div>
+                <div className="col col-lg-2 loginbnt">3 of 3</div>
               </div>
             </div>
           </div>

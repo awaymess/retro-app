@@ -424,10 +424,10 @@ export default function Layout({ children }) {
             <span className="hiddentext">Contact</span>
           </a> */}
 
-          <div class="wrapper">
-            <div class="right-col">
-              <div class="profile-card">
-                <div class="profile-pic">
+          <div className="wrapper">
+            <div className="right-col">
+              <div className="profile-card">
+                <div className="profile-pic">
                   <Image
                     src={logo}
                     alt="Picture of the author"
@@ -435,14 +435,14 @@ export default function Layout({ children }) {
                   />
                 </div>
                 <div>
-                  <p class="username">modern_web_channel</p>
-                  <p class="sub-text">kunaal kumar</p>
+                  <p className="username">modern_web_channel</p>
+                  <p className="sub-text">kunaal kumar</p>
                 </div>
-                <button class="action-btn">switch</button>
+                <button className="action-btn">switch</button>
               </div>
-              <p class="suggestion-text">Suggestions for you</p>
-              <div class="profile-card">
-                <div class="profile-pic">
+              <p className="suggestion-text">Suggestions for you</p>
+              <div className="profile-card">
+                <div className="profile-pic">
                   <Image
                     src={logo}
                     alt="Picture of the author"
@@ -451,10 +451,10 @@ export default function Layout({ children }) {
                 </div>
 
                 <div>
-                  <p class="username">modern_web_channel</p>
-                  <p class="sub-text">followed bu user</p>
+                  <p className="username">modern_web_channel</p>
+                  <p className="sub-text">followed bu user</p>
                 </div>
-                <button class="action-btn">follow</button>
+                <button className="action-btn">follow</button>
               </div>
               <Link href={"/Profile"}>
                 <a className={router.pathname == "/Profile" ? "active" : ""}>
