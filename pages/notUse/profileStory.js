@@ -95,62 +95,62 @@ export default function Home() {
       </style>
 
       <main>
-        <div div class="wrapper">
-          <div class="left-col">
-            <div class="status-wrapper">
-              <div class="status-card">
-                <div class="profile-pic">
+        <div div className="wrapper">
+          <div className="left-col">
+            <div className="status-wrapper">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_1</p>
+                <p className="username">user_name_1</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_2</p>
+                <p className="username">user_name_2</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_3</p>
+                <p className="username">user_name_3</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_3</p>
+                <p className="username">user_name_3</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_3</p>
+                <p className="username">user_name_3</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_3</p>
+                <p className="username">user_name_3</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_3</p>
+                <p className="username">user_name_3</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_3</p>
+                <p className="username">user_name_3</p>
               </div>
-              <div class="status-card">
-                <div class="profile-pic">
+              <div className="status-card">
+                <div className="profile-pic">
                   <Image src={logo} alt="" />
                 </div>
-                <p class="username">user_name_3</p>
+                <p className="username">user_name_3</p>
               </div>
 
               {/* // +5 more status card elements. */}
