@@ -24,9 +24,6 @@ export default function Post() {
   };
 
   const newPosts = {
-    // userId: 1,
-    // title: "A new post",
-    // body: "This is the body of the new post",
     name: "tesrtet4",
     like: [
       {
