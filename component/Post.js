@@ -15,7 +15,7 @@ export default function Post() {
 
   if (isLoading)
     return (
-      <div class="large-indicator overlay">
+      <div class="large-indicator">
         <div></div>
         <div></div>
         <div></div>
