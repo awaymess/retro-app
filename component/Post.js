@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 // import styled from "styled-components";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
 
 export default function Post() {
+  const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+
   useEffect(() => {
     Poster();
-    
     // sendPostRequest();
   }, []);
+
+  if (isLoading)
+    return (
+      <div class="large-indicator overlay">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
+  if (!data) return <p>No profile data</p>;
+
   const Poster = async () => {
+    setLoading(true);
     try {
       const resp = await axios.get("http://localhost:4000/poster");
       // console.log(resp.data);
       setData(resp.data);
+      setLoading(false);
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -81,6 +94,7 @@ export default function Post() {
     <>
       <style>
         {`
+    
     .post{
       width: 100%;
       height: auto;
@@ -219,7 +233,6 @@ export default function Post() {
       </style>
 
       {data.map((item, index) => (
-        
         <div className="content" key={index}>
           <div className="wrapper">
             <div className="left-col">
@@ -255,7 +268,7 @@ export default function Post() {
                   </div>
                   <p className="likes">{item.like.length} likes</p>
                   {item.comments.map((comment, index) => (
-                    <p className="description" key={index} >
+                    <p className="description" key={index}>
                       <span>{comment.name} </span>
                       {comment.comment}
                     </p>
