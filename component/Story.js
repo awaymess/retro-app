@@ -5,8 +5,6 @@ import logofull from "../public/ig.png";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 
 
-
-
 export default function Story() {
   // const sideScroll = (
   //   element: HTMLDivElement,
@@ -113,7 +111,7 @@ export default function Story() {
       text-align: center;
       font-size: 12px;
       margin-top:5px;
-      color: rgba(0, 0, 0, 0.5)
+      color: rgba(0, 0, 0, 0.5);
       margin-bottom: 0px;
    }
 

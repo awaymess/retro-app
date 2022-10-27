@@ -3,32 +3,10 @@ import axios from "axios";
 // import styled from "styled-components";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
-import dayjs from "dayjs";
 
 export default function Post() {
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  // const [name, setName] = useState("away");
-
-  const [comments, setComment] = useState({
-    name: "away",
-    comment: "",
-  });
-
-  const [likes, setlikes] = useState({
-    name: "away",
-  });
-
-  // function cammentChangeValue(e) {
-  //   const { name, value } = e.target;
-  //   console.log(value);
-  //   setAddUsers((prev) => {
-  //     return {
-  //       ...prev,
-  //       [name]: value,
-  //     };
-  //   });
-  // }
 
   useEffect(() => {
     Poster();
@@ -51,12 +29,6 @@ export default function Post() {
       const resp = await axios.get("http://localhost:4000/poster");
       // console.log(resp.data);
       setData(resp.data);
-      // setData(resp.data.date);
-
-      var d = Date(Date.now());
-      var a = d.toString();
-      console.log(a);
-
       setLoading(false);
     } catch (err) {
       // Handle Error Here
@@ -64,74 +36,67 @@ export default function Post() {
     }
   };
 
-  const sendComment = async (e) => {
-    // e.preventDefault();
-
-    var data = {
-      id: e._id,
-      comments: [
-        {
-          name: comments.name,
-          comment: comments.comment,
-        },
-      ],
-    };
-
-    try {
-      const resp = await axios.put(
-        "http://localhost:4000/poster/comment",
-        data
-      );
-      window.location.href = "/";
-      // Poster();
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
+  const newPosts = {
+    name: "tesrtet4",
+    like: [
+      {
+        name: "winrwe2",
+        status: 1,
+        checkinEnabled: true,
+      },
+      {
+        name: "winrwe2",
+        status: 0,
+        checkinEnabled: false,
+      },
+      {
+        name: "winrwe2",
+        status: 1,
+        checkinEnabled: true,
+      },
+      {
+        name: "winrwe2",
+        status: 0,
+        checkinEnabled: false,
+      },
+    ],
+    comments: [
+      {
+        name: "winrwe2",
+        comment: "ytestr1",
+      },
+      {
+        name: "winrwe2",
+        comment: "ytestr1",
+      },
+      {
+        name: "winrdrtghdfgfdsgwe2",
+        comment: "ytesdfgdfgdfgdfgdfgtr1",
+      },
+    ],
   };
 
-  const sendLike = async (e) => {
-    // e.preventDefault();
-    var data = {
-      id: e._id,
-      like: [
-        {
-          name: likes.name,
-          status: 1,
-          checkinEnabled: true,
-        },
-      ],
-    };
+  
+  // const user = {
+  //   name: "",
+  // };
 
+  // const [comments, setComments] = useState("");
+
+  const sendPostRequest = async (e) => {
+    e.preventDefault();
     try {
-      const resp = await axios.put("http://localhost:4000/poster/like", data);
-      // window.location.href = "/";
-      // Poster();
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  };
-
-  const sendUnLike = async (e) => {
-    // e.preventDefault();
-    // console.log(e)
-    var data = {
-      id: e._id,
-      name: likes.name,
-    };
-    // console.log(data);
-
-    try {
-      const resp = await axios.put(
-        "http://localhost:4000/poster/del-like",
-        data
+      const resp = await axios.post(
+        "http://localhost:4000/poster/create-poster",
+        newPosts
+        // comments
       );
-      // window.location.href = "/";
+      console.log(resp.data);
     } catch (err) {
       // Handle Error Here
       console.error(err);
     }
+    Poster();
   };
 
   return (
@@ -281,8 +246,6 @@ export default function Post() {
           <div className="wrapper">
             <div className="left-col">
               {/* // status wrappers */}
-              {/* onClick={() => UpdateUser(user.id)}> */}
-
               <div className="post">
                 <div className="info">
                   <div className="user">
@@ -296,41 +259,10 @@ export default function Post() {
                   {/* <img src="img/option.PNG" className="options" alt="" /> */}
                 </div>
 
-                {item.picture.map((picture, index) => (
-                  <Image
-                    src={picture.name}
-                    // className={"post-image"}
-                    alt=""
-                    layout="responsive"
-                    width="100%"
-                    height="100%"
-                    objectFit="cover"
-                  />
-
-                  // <p className="description" key={index}>
-                  //   <span>{comment.name} </span>
-                  //   {comment.comment}
-                  // </p>
-                ))}
-
-                <Image src={item.picture.name} className="post-image" alt="" />
+                <Image src={logo} className="post-image" alt="" />
                 <div className="post-content">
                   <div className="reaction-wrapper">
-                    {/* <i className="bi bi-heart icon"></i> */}
-                    <button
-                      className="comment-btn"
-                      onClick={() => sendLike(item)}
-                      type="submit"
-                    >
-                      <i className="bi bi-heart icon"></i>
-                    </button>
-                    <button
-                      className="comment-btn"
-                      onClick={() => sendUnLike(item)}
-                      type="submit"
-                    >
-                      <i className="bi bi-heart icon">1</i>
-                    </button>
+                    <i className="bi bi-heart icon"></i>
 
                     <i className="bi bi-chat icon"></i>
 
@@ -344,17 +276,13 @@ export default function Post() {
                   <img src="img/save.PNG" className="save icon" alt="" /> */}
                   </div>
                   <p className="likes">{item.like.length} likes</p>
-                  {/* <p className="test">{item.picture.length} tets</p> */}
                   {item.comments.map((comment, index) => (
                     <p className="description" key={index}>
                       <span>{comment.name} </span>
                       {comment.comment}
                     </p>
                   ))}
-                  <p className="post-time">
-                    {dayjs(Date(item.date)).format("DD MMM YYYY H:mma")}
-                  </p>
-                  {/* <p className="post-time">2 minutes ago</p> */}
+                  <p className="post-time">2 minutes ago</p>
                 </div>
 
                 <div className="comment-wrapper">
@@ -362,32 +290,12 @@ export default function Post() {
                   {/* <i className="bi bi-heart icon"></i> */}
                   <i className="ic bi bi-emoji-sunglasses"></i>
 
-                  {/* <input onChange={() => setId(item.id)}></input> */}
-
                   <input
                     type="text"
                     className="comment-box"
                     placeholder="Add a comment"
-                    onChange={(e) =>
-                      setComment({ ...comments, ["comment"]: e.target.value })
-                    }
                   />
-                  {/* <input
-                    type="text"
-                    className="comment-box"
-                    placeholder="Add a name"
-                    onChange={(e) =>
-                      setComment({ ...comments, ["name"]: e.target.value })
-                    }
-                  /> */}
-
-                  <button
-                    className="comment-btn"
-                    onClick={() => sendComment(item)}
-                    type="submit"
-                  >
-                    post
-                  </button>
+                  <button className="comment-btn">post</button>
                 </div>
               </div>
             </div>

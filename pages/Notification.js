@@ -1,10 +1,10 @@
 import Layout from "../component/layout/layout";
-import Search from "../component/Search";
+import Notification from "../component/Notification";
 
 export default function Home({ Component, pageProps }) {
   return (
     <Layout>
-      <Search />
+      <Notification />
     </Layout>
   );
 }

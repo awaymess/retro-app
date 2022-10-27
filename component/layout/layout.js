@@ -486,19 +486,23 @@ export default function Layout({ children }) {
         </div>
 
         <div className="topnav">
-          <a className={router.pathname == "/" ? "active" : ""}>
-            <Image
-              src={logofull}
-              alt="Picture of the author"
-              width="100%"
-              height="38px"
-              placeholder="blur"
-            />
-          </a>
+          <Link href={"/"}>
+            <a className={router.pathname == "/" ? "active" : ""}>
+              <Image
+                src={logofull}
+                alt="Picture of the author"
+                width="100%"
+                height="38px"
+                placeholder="blur"
+              />
+            </a>
+          </Link>
 
-          <a className={router.pathname == "/" ? "active split" : "split"}>
-            <i className="bi bi-heart"></i>
-          </a>
+          <Link href={"/Notification"}>
+            <a className={router.pathname == "/" ? "active split" : "split"}>
+              <i className="bi bi-heart"></i>
+            </a>
+          </Link>
         </div>
         <>{children}</>
         {/* <div className="content center">
