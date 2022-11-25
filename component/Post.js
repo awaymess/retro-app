@@ -134,6 +134,12 @@ export default function Post() {
     }
   };
 
+  // var newArray = data.filter(function (el) {
+  //   return el.like ;
+  // });
+  // console.log(newArray);
+  
+
   return (
     <>
       <style>
@@ -315,22 +321,86 @@ export default function Post() {
 
                 <Image src={item.picture.name} className="post-image" alt="" />
                 <div className="post-content">
+                  {/* <p>{likes.name}</p> */}
+
                   <div className="reaction-wrapper">
+                    {/* <>
+                      <p>{item.like}</p>
+                      {item.like.includes(likes.name) ? <p>1</p> : <p>2</p>}
+                    </> */}
+
                     {/* <i className="bi bi-heart icon"></i> */}
+                    {/* <>
+                      {data.filter((item) => item.like.toString() === "away")
+                        .length < 0 ? (
+                        <p>true</p>
+                      ) : (
+                        <p>false</p>
+                      )}
+                    </>
+                     */}
+
+                     {/* {data.filter(itemm: (name: never) => unknown, thisArg?: any)}ฝ */}
+
+                    <>
+                      {data.filter((item) => item.like.toString() === "away")
+                        .length < 0 ? (
+                        <p>true</p>
+                      ) : (
+                        <p>false</p>
+                      )}
+                    </>
+
+                    {item.like.map((like) => (
+                      <>
+                        {like.name.includes("") ? (
+                          <p>true1</p>
+                        ) : (
+                          // <button
+                          //   className="comment-btn"
+                          //   onClick={() => sendLike(item)}
+                          //   type="submit"
+                          // >
+                          //   like
+                          // </button>
+                          <p>false1</p>
+                          // <button
+                          //   className="comment-btn"
+                          //   onClick={() => sendUnLike(item)}
+                          //   type="submit"
+                          // >
+                          //   Unlike
+                          // </button>
+                        )}
+                      </>
+                    ))}
                     <button
                       className="comment-btn"
                       onClick={() => sendLike(item)}
                       type="submit"
                     >
-                      <i className="bi bi-heart icon"></i>
+                      like
                     </button>
-                    <button
-                      className="comment-btn"
-                      onClick={() => sendUnLike(item)}
-                      type="submit"
-                    >
-                      <i className="bi bi-heart icon">1</i>
-                    </button>
+
+                    {/*  {item.like.includes(likes.name) ? (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendUnLike(item)}
+                        type="submit"
+                      >
+                        Unlike
+                        <i className="bi bi-heart icon">Like</i>
+                      </button>
+                    ) : (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendLike(item)}
+                        type="submit"
+                      >
+                        like
+                        <i className="bi bi-heart icon">Unlike</i>
+                      </button>
+                    )} */}
 
                     <i className="bi bi-chat icon"></i>
 
@@ -372,14 +442,6 @@ export default function Post() {
                       setComment({ ...comments, ["comment"]: e.target.value })
                     }
                   />
-                  {/* <input
-                    type="text"
-                    className="comment-box"
-                    placeholder="Add a name"
-                    onChange={(e) =>
-                      setComment({ ...comments, ["name"]: e.target.value })
-                    }
-                  /> */}
 
                   <button
                     className="comment-btn"
