@@ -3,7 +3,7 @@ import axios from "axios";
 // import styled from "styled-components";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 
 export default function Post() {
   const [isLoading, setLoading] = useState(false);
@@ -138,7 +138,6 @@ export default function Post() {
   //   return el.like ;
   // });
   // console.log(newArray);
-  
 
   return (
     <>
@@ -340,47 +339,72 @@ export default function Post() {
                     </>
                      */}
 
-                     {/* {data.filter(itemm: (name: never) => unknown, thisArg?: any)}ฝ */}
+                    {/* {data.filter(itemm: (name: never) => unknown, thisArg?: any)}ฝ */}
 
-                    <>
+                    {/* <>
                       {data.filter((item) => item.like.toString() === "away")
                         .length < 0 ? (
                         <p>true</p>
                       ) : (
                         <p>false</p>
                       )}
-                    </>
-
-                    {item.like.map((like) => (
+                    </> */}
+                    {item.like.length == 0 ? (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendLike(item)}
+                        type="submit"
+                      >
+                        like
+                      </button>
+                    ) : (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendUnLike(item)}
+                        type="submit"
+                      >
+                        Unlike
+                      </button>
+                    )}
+                    
+                    {/* {item.like.map((like) => (
                       <>
-                        {like.name.includes("") ? (
-                          <p>true1</p>
+                        {like.name != null ? (
+                          <button
+                            className="comment-btn"
+                            onClick={() => sendUnLike(item)}
+                            type="submit"
+                          >
+                            Unlike
+                          </button>
                         ) : (
-                          // <button
-                          //   className="comment-btn"
-                          //   onClick={() => sendLike(item)}
-                          //   type="submit"
-                          // >
-                          //   like
-                          // </button>
-                          <p>false1</p>
-                          // <button
-                          //   className="comment-btn"
-                          //   onClick={() => sendUnLike(item)}
-                          //   type="submit"
-                          // >
-                          //   Unlike
-                          // </button>
+                          <button
+                            className="comment-btn"
+                            onClick={() => sendLike(item)}
+                            type="submit"
+                          >
+                            like
+                            {like.name}
+                          </button>
                         )}
                       </>
-                    ))}
-                    <button
+                    ))} */}
+
+                    {/* <button
+                      className="comment-btn"
+                      onClick={() => sendUnLike(item)}
+                      type="submit"
+                    >
+                      Unlike
+                    </button> */}
+                    {/* {item.like[0].name} */}
+                    {/* <button
                       className="comment-btn"
                       onClick={() => sendLike(item)}
                       type="submit"
                     >
                       like
-                    </button>
+                    </button> */}
 
                     {/*  {item.like.includes(likes.name) ? (
                       <button
@@ -422,7 +446,7 @@ export default function Post() {
                     </p>
                   ))}
                   <p className="post-time">
-                    {dayjs(Date(item.date)).format("DD MMM YYYY H:mma")}
+                    {/* {dayjs(Date(item.date)).format("DD MMM YYYY H:mma")} */}
                   </p>
                   {/* <p className="post-time">2 minutes ago</p> */}
                 </div>

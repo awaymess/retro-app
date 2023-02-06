@@ -435,8 +435,8 @@ export default function Layout({ children }) {
                   />
                 </div>
                 <div>
-                  <p className="username">modern_web_channel</p>
-                  <p className="sub-text">kunaal kumar</p>
+                  <p className="username">User</p>
+                  <p className="sub-text">nameUser</p>
                 </div>
                 <button className="action-btn">switch</button>
               </div>
@@ -451,8 +451,8 @@ export default function Layout({ children }) {
                 </div>
 
                 <div>
-                  <p className="username">modern_web_channel</p>
-                  <p className="sub-text">followed bu user</p>
+                  <p className="username">User</p>
+                  <p className="sub-text">followed by user</p>
                 </div>
                 <button className="action-btn">follow</button>
               </div>

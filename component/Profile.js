@@ -3,7 +3,7 @@ import axios from "axios";
 // import styled from "styled-components";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 
 export default function Post() {
   const [isLoading, setLoading] = useState(false);
@@ -536,7 +536,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 			<div class="profile-user-settings">
 
-				<h1 class="profile-user-name">janedoe_</h1>
+				<h1 class="profile-user-name">User</h1>
 
 				<button class="btn profile-edit-btn">Edit Profile</button>
 
@@ -556,7 +556,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 			<div class="profile-bio">
 
-				<p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
+				<p><span class="profile-real-name">User</span> Dis 📷✈️🏕️</p>
 
 			</div>
 
