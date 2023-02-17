@@ -15,13 +15,13 @@ main {
   width: 100%;
   height: 100vh;
 
-  /* background: #df9af7;
+  background: #df9af7;
   background-image: linear-gradient(
       rgba(244, 185, 215) 0.3em,
       transparent 0.3em
     ),
     linear-gradient(90deg, rgba(244, 185, 215) 0.3em, transparent 0.3em);
-  background-size: 6em 6em; */
+  background-size: 6em 6em;
 }
 
 .large-indicator {

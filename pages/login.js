@@ -2,8 +2,12 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
-export default function Home() {
+export default function Login() {
+  const router = useRouter();
   const bntyel = {
     background: "#fcd46e",
     border: "2px solid #4e2711",
@@ -18,6 +22,67 @@ export default function Home() {
     border: "2px solid #4e2711",
     color: "#4e2711",
   };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  var data = {
+    fullname: name,
+    email: email,
+    password: password,
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    axios
+      .post("http://localhost:3001/api/v1/register", data)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          //   router.push("/login");
+          router.push("/login");
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 409) {
+          alert("Email Used");
+        }
+        if (error.response.status === 403) {
+          alert("User Used");
+        }
+        // error.response.status;
+        console.log(error.response.status);
+      });
+  }
+  function handleSubmitLogin(event) {
+    event.preventDefault();
+    axios
+      .post("http://localhost:3001/api/v1/login", data)
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("token", response.data.data.accessToken);
+        if (response.status === 200) {
+          //   router.push("/login");
+          router.push("/");
+        }
+      })
+
+      .catch((error) => {
+        if (error.response.status === 404) {
+          alert("incorrect");
+        }
+        if (error.response.status === 403) {
+          alert("incorrect_Pass");
+        }
+
+        console.log(error);
+      });
+  }
 
   return (
     <div>
@@ -175,7 +240,7 @@ export default function Home() {
         <div
           className="modal"
           id="staticBackdrop"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -195,19 +260,23 @@ export default function Home() {
                 </div>
 
                 <div className="card-footer" style={bntyel2}>
-                  <form>
+                  <form onSubmit={handleSubmitLogin}>
                     <div className="d-grid gap-2 col-9 mx-auto mt-3">
                       <input
-                        type="text"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        type="mail"
                         className="form-control"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
-                        placeholder="Username"
+                        placeholder="Email"
                         style={bntyel3}
                       />
                     </div>
                     <div className="d-grid gap-5 col-9 mx-auto mt-3">
                       <input
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
                         type="password"
                         className="form-control"
                         id="exampleInputPassword1"
@@ -229,7 +298,7 @@ export default function Home() {
         <div
           className="modal"
           id="staticBackdrop1"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -249,12 +318,13 @@ export default function Home() {
                 </div>
 
                 <div className="card-footer" style={bntyel2}>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="d-grid gap-2 col-9 mx-auto mt-3">
                       <input
                         type="text"
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
                         className="form-control"
-                        id="exampleInputEmail1"
                         aria-describedby="emailHelp"
                         placeholder="Username"
                         style={bntyel3}
@@ -262,9 +332,10 @@ export default function Home() {
                     </div>
                     <div className="d-grid gap-2 col-9 mx-auto mt-3">
                       <input
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
                         type="mail"
                         className="form-control"
-                        id="exampleInputEmail1"
                         aria-describedby="emailHelp"
                         placeholder="Email"
                         style={bntyel3}
@@ -272,23 +343,27 @@ export default function Home() {
                     </div>
                     <div className="d-grid gap-5 col-9 mx-auto mt-3">
                       <input
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
                         type="password"
                         className="form-control"
-                        id="exampleInputPassword1"
                         placeholder="Password"
                         style={bntyel3}
                       />
                     </div>
                     <div className="d-grid gap-5 col-9 mx-auto mt-3">
                       <input
+                        value={confirmPassword}
+                        onChange={(event) =>
+                          setConfirmPassword(event.target.value)
+                        }
                         type="password"
                         className="form-control"
-                        id="exampleInputPassword1"
                         placeholder="Confrim Password"
                         style={bntyel3}
                       />
                     </div>
-
+                    {/* <button type="submit">Register</button> */}
                     <button type="submit" className="btn mt-3" style={bntyel}>
                       Enter
                     </button>

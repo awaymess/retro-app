@@ -3,7 +3,7 @@ import axios from "axios";
 // import styled from "styled-components";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 import base64 from "base-64";
 
 export default function Post() {
@@ -87,7 +87,7 @@ export default function Post() {
 
       // var d = Date(Date.now());
       // var a = d.toString();
-      // console.log(Date(Date.now()).format("DD MMM YYYY H:mma"));
+      // console.log(a);
 
       setLoading(false);
     } catch (err) {
@@ -319,7 +319,7 @@ export default function Post() {
       width: 100%;
       height: 50px;
       display: flex;
-      margin-top: -20px;
+      margin-top: -40px;
       align-items: center;
   }
   
@@ -341,20 +341,24 @@ export default function Post() {
         <div className="content" key={index}>
           <div className="wrapper">
             <div className="left-col">
+              {/* // status wrappers */}
+              {/* onClick={() => UpdateUser(user.id)}> */}
+
               <div className="post">
                 <div className="info">
                   <div className="user">
                     <div className="profile-pic">
                       <Image src={logo} alt="" />
                     </div>
-                    <p className="username">{item.Uid}</p>
+                    <p className="username"> {item.Uid}</p>
                   </div>
-                  {/* <img src="img/option.PNG" className="options" alt="" /> */}
                   <i className="bi bi-three-dots save icon"></i>
-                  {/* <Image src={logo} alt="" /> */}
+
+                  {/* <img src="img/option.PNG" className="options" alt="" /> */}
                 </div>
-                {/* <Image src={logo} alt="" className="post-image" /> */}
-                <Image
+
+                {/* <img src={`data:image/jpeg;base64,${item.Picture}`} /> */}
+                {/* <Image
                   src={`data:image/jpeg;base64,${item.Picture}`}
                   className={"post-image"}
                   alt=""
@@ -362,9 +366,119 @@ export default function Post() {
                   width="100%"
                   height="100%"
                   objectFit="cover"
-                />
+                  // zindex={-500}
+                /> */}
+
+                <p className="description" key={index}>
+                    <span>{index} </span>
+                    {item.Comment}
+                  </p>
+
+                <Image src={item.picture} className="post-image" alt="" />
                 <div className="post-content">
+                  <p>{likes.name}</p>
                   <div className="reaction-wrapper">
+                    <>
+                      <p>{index}</p>
+                      {/* {item.like.includes(likes.name) ? <p>1</p> : <p>2</p>} */}
+                    </>
+
+                    {/* <>
+                      {data.filter((item) => item.like.toString() === "away")
+                        .length < 0 ? (
+                        <p>true</p>
+                      ) : (
+                        <p>false</p>
+                      )}
+                    </> */}
+
+                    {/* {data.filter(item: (name: never) => unknown, thisArg?: any)} */}
+
+                    {/* <>
+                      {data.filter((item) => item.like.toString() === "away")
+                        .length < 0 ? (
+                        <p>true</p>
+                      ) : (
+                        <p>false</p>
+                      )}
+                    </> */}
+                    {/* {item.Uid == 0 ? (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendLike(item)}
+                        type="submit"
+                      >
+                        like
+                      </button>
+                    ) : (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendUnLike(item)}
+                        type="submit"
+                      >
+                        Unlike
+                      </button>
+                    )} */}
+
+                    {/* {item.like.map((like) => (
+                      <>
+                        {like.name != null ? (
+                          <button
+                            className="comment-btn"
+                            onClick={() => sendUnLike(item)}
+                            type="submit"
+                          >
+                            Unlike
+                          </button>
+                        ) : (
+                          <button
+                            className="comment-btn"
+                            onClick={() => sendLike(item)}
+                            type="submit"
+                          >
+                            like
+                            {like.name}
+                          </button>
+                        )}
+                      </>
+                    ))} */}
+
+                    {/* <button
+                      className="comment-btn"
+                      onClick={() => sendUnLike(item)}
+                      type="submit"
+                    >
+                      Unlike
+                    </button> */}
+                    {/* {item.like[0].name}
+                    <button
+                      className="comment-btn"
+                      onClick={() => sendLike(item)}
+                      type="submit"
+                    >
+                      like
+                    </button>
+
+                     {item.like.includes(likes.name) ? (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendUnLike(item)}
+                        type="submit"
+                      >
+                        Unlike
+                        <i className="bi bi-heart icon">Like</i>
+                      </button>
+                    ) : (
+                      <button
+                        className="comment-btn"
+                        onClick={() => sendLike(item)}
+                        type="submit"
+                      >
+                        like
+                        <i className="bi bi-heart icon">Unlike</i>
+                      </button>
+                    )} */}
+
                     <i className="bi bi-heart icon"></i>
 
                     <i className="bi bi-chat icon"></i>
@@ -373,26 +487,32 @@ export default function Post() {
 
                     <i className="bi bi-bookmark save icon"></i>
 
-                    {/* <img src="img/like.PNG" className="icon" alt="" />
+                    <img src="img/like.PNG" className="icon" alt="" />
                     <img src="img/comment.PNG" className="icon" alt="" />
                     <img src="img/send.PNG" className="icon" alt="" />
-                    <img src="img/save.PNG" className="save icon" alt="" /> */}
+                    <img src="img/save.PNG" className="save icon" alt="" />
                   </div>
-                  <p className="likes">1,012 likes</p>
-                  <p className="description">
-                    <span>{item.Uid} </span> {item.Comment}
-                  </p>
-                  <p className="post-time">
-                    {dayjs(Date(item.CreatedAt)).format("DD MMM YYYY H:mm")}
-                    {/* {item.CreatedAt} */}
-                  </p>
-
-                  {/* <p className="post-time">2 minutes ago</p> */}
+                  <p className="likes">{index} likes</p>
+                  <p className="test">{index} tets</p>
+                  {/* {item.comments.map((comment, index) => (
+                    <p className="description" key={index}>
+                      <span>{comment.name} </span>
+                      {comment.comment}
+                    </p> */}
+                  ))}
+                  {/* <p className="post-time">
+                    {dayjs(Date(item.date)).format("DD MMM YYYY H:mma")}
+                  </p> */}
+                  <p className="post-time">2 minutes ago</p>
                 </div>
-                <div className="comment-wrapper">
-                  <i className="bi bi-send icon"></i>
 
-                  {/* <img src="img/smile.PNG" className="icon" alt="" /> */}
+                <div className="comment-wrapper">
+                  <Image src={logo} className="icon" alt="" />
+                  <i className="bi bi-heart icon"></i>
+                  <i className="ic bi bi-emoji-sunglasses"></i>
+
+                  <input onChange={() => setId(item.id)}></input>
+
                   <input
                     type="text"
                     className="comment-box"
@@ -401,7 +521,14 @@ export default function Post() {
                       setComment({ ...comments, ["comment"]: e.target.value })
                     }
                   />
-                  <button className="comment-btn">post</button>
+
+                  <button
+                    className="comment-btn"
+                    onClick={() => sendComment(item)}
+                    type="submit"
+                  >
+                    post
+                  </button>
                 </div>
               </div>
             </div>
