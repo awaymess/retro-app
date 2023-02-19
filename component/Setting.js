@@ -8,10 +8,13 @@ export default function Post() {
   const url_v1 = process.env.NEXT_PUBLIC_API_URL_V1;
   const url_v2 = process.env.NEXT_PUBLIC_API_URL_V2;
   const [isLoading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
   const [file, setFile] = useState(null);
-  const [comment, setComment] = useState("");
-  const [location, setLocation] = useState("");
+
+  const [name, setName] = useState("");
+  const [subname, setSubname] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("");
+  const [picture, setPicture] = useState("");
   const [imagePreview, setImagePreview] = useState("");
 
   const handleFileChange = (e) => {
@@ -46,7 +49,6 @@ export default function Post() {
         <div></div>
       </div>
     );
-  if (!data) return <p>No profile data</p>;
 
   const Profile = async () => {
     try {
@@ -59,6 +61,15 @@ export default function Post() {
       if (resp.data.status !== 200) {
         window.location.href = "/login";
       }
+
+      console.log("subName", resp.data.data[0]);
+
+      const { name, description, status, subname, picture } = resp.data.data[0];
+      setName(name);
+      setSubname(subname);
+      setDescription(description);
+      setStatus(status);
+      setPicture(picture);
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -68,25 +79,29 @@ export default function Post() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (file === null) {
-      return alert("Please select an image");
-    }
-    if (comment === null) {
-      setLocation("");
-    }
-
     const token = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("image", file);
-    formData.append("Comment", comment);
-    formData.append("Location", location);
+    formData.append("Name", name);
+    formData.append("SubName", subname);
+    formData.append("Description", description);
+    formData.append("Status", status);
     axios
-      .post(url_v2 + "image", formData, {
+      .post(url_v2 + "profile", formData, {
         headers: {
           Authorization: "Bearer " + token,
         },
       })
-      .then((window.location.href = "/"))
+      .then((response) => {
+        if (response.data === '{"status":201}{"status":200}') {
+          alert("Name used");
+          // console.log(response.data);
+          //   router.push("/login");
+          // (window.location.href = "/")
+        }
+        alert("succecfully");
+        window.location.href = "/Profile";
+      })
       .catch((err) => console.error(err));
   };
 
@@ -216,7 +231,15 @@ export default function Post() {
                     className="post-image"
                   />
                 ) : (
-                  <div className="post-image" />
+                  <Image
+                    src={`data:image/jpeg;base64,${picture}`}
+                    className={"post-image"}
+                    alt=""
+                    layout="responsive"
+                    width="100%"
+                    height="100%"
+                    
+                  />
                 )}
 
                 {/* <Image src={logo} className="post-image" alt="" /> */}
@@ -230,29 +253,69 @@ export default function Post() {
                     // onChange={(e) => setFile(e.target.files[0])}
                   />
                 </div>
-                <div className="comment-wrapper">
-                  <i className="ic bi bi-emoji-sunglasses"></i>
 
+                <div className="comment-wrapper">
+                  {/* <i className="ic bi bi-emoji-sunglasses"></i> */}
+                  <p style={{ width: 100 }}> Name: </p>
                   <textarea
                     type="text"
                     className="comment-box"
-                    placeholder="Description"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
 
                   <p className="comment-btn"></p>
                 </div>
                 <div className="comment-wrapper">
-                  <i className="ic bi bi-geo-alt"></i>
+                  {/* <i className="ic bi bi-emoji-sunglasses"></i> */}
+                  <p style={{ width: 100 }}>Sub Name: </p>
+                  <textarea
+                    type="text"
+                    className="comment-box"
+                    placeholder="Sub Name"
+                    value={subname}
+                    onChange={(e) => setSubname(e.target.value)}
+                  />
 
-                  <input
+                  <p className="comment-btn"></p>
+                </div>
+                <div className="comment-wrapper">
+                  <p style={{ width: 100 }}>Description: </p>
+
+                  <textarea
+                    type="text"
+                    className="comment-box"
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+
+                  <p className="comment-btn"></p>
+                </div>
+                <div className="comment-wrapper">
+                  <p style={{ width: 100 }}> Status: </p>
+                  <textarea
+                    type="text"
+                    className="comment-box"
+                    placeholder="Status"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                  />
+
+                  <p className="comment-btn"></p>
+                </div>
+
+                <div className="comment-wrapper">
+                  <i className="ic "></i>
+
+                  {/* <input
                     type="text"
                     className="comment-box"
                     placeholder="Location"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                  />
+                  /> */}
 
                   <button className="comment-btn" type="submit">
                     Share
@@ -262,6 +325,7 @@ export default function Post() {
             </form>
           </div>
         </div>
+        
       </div>
     </>
   );

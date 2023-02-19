@@ -6,38 +6,9 @@ import Image from "next/image";
 import logofull from "../../public/ig.png";
 import logo from "../../public/instagram-logo-2022_freelogovectors.net_.png";
 import logo1 from "../../public/instagram-logo-2022_freelogovectors.net_1.png";
-import axios from "axios";
 
 export default function Layout({ children }) {
   const router = useRouter();
-  const url_v1 = process.env.NEXT_PUBLIC_API_URL_V1;
-  const url_v2 = process.env.NEXT_PUBLIC_API_URL_V2;
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    Profile();
-    // sendPostRequest();
-  }, []);
-
-  const Profile = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const resp = await axios.get(url_v2 + "profile", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      if (resp.data.length < 0) {
-        window.location.href = "/Setting";
-      }
-
-      setData(resp.data.data);
-      // console.log(resp.data.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  };
 
   const menuItems = [
     {
@@ -107,35 +78,6 @@ export default function Layout({ children }) {
             background-color: #fff5de;
             color: #502b17;
           }
-        
-          .sidebarright {
-            // margin: 0;
-            margin-left: 75%;
-            // padding: 0;
-            width: 24%;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-            padding-top: 50px;
-            z-index: 1;
-
-
-          }
-          .sidebarright a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-          }
-          .sidebarright a.active {
-            background-color: #04AA6D;
-            color: white;
-          }
-          .sidebarright a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-          }
 
           .topnav {
             margin: 0;
@@ -168,13 +110,17 @@ export default function Layout({ children }) {
             padding: 12px;
           }
           div.content {
-            margin-left: 21%;
-            margin-right: 21%;
+            margin-left: 28%;
+            // margin-right: 30px;
+
             // padding: 1px 16px;
             // height: 100vh;
             padding-top: 0px;
-            width : 472px;
-            margin: auto;
+            max-width : 965px;
+            width : 65%;
+            // max-width: 300px;
+            
+            // margin: auto;
           }
 
 
@@ -290,16 +236,22 @@ export default function Layout({ children }) {
               padding:8px;
               
             }
-            div.content {
-              // margin-left: 0;
-              margin-left: 10%;
-              margin-right: 10%;
-              // padding: 1px 16px;
-              // height: 100vh;
-              // padding-top: 90px;
-              width : 472px;
-              margin: auto;
+            // div.content {
+            //   // margin-left: 0;
+            //   // margin-left: 10%;
+            //   // margin-right: 10%;
+            //   // padding: 1px 16px;
+            //   // height: 100vh;
+            //   // padding-top: 90px;
+            //   width : 100px;
+            //   // margin: auto;
 
+            // }
+
+            div.content {
+              margin-left: 0px;
+              width : 100%;
+              min-width: 300px;
             }
             .hiddentext{
               font-size: 0px;
@@ -323,14 +275,9 @@ export default function Layout({ children }) {
               position: fixed;
             }
             div.content {
-              // margin-left: 0;
-              margin-left: 10%;
-              margin-right: 10%;
-              // padding: 1px 16px;
-              // height: 100vh;
-              width : 472px;
-              // padding-top: 50px;
-              margin: auto;
+              margin-left: 18%;
+              padding-top: 0px;
+              width : 72%;
             }
             .hiddentext{
               font-size: 0px;
@@ -374,7 +321,7 @@ export default function Layout({ children }) {
             </div>
           </Link>
 
-          <Link href={"/"}>
+          <Link href={"/index2"}>
             <div className="hiddenitemfull">
               <a>
                 <Image
@@ -426,167 +373,14 @@ export default function Layout({ children }) {
             </a>
           </Link>
           <Link href={"/Profile"}>
-            <a className={router.pathname == "/" ? "Profile" : ""}>
+            <a className={router.pathname == "/Profile" ? "active" : ""}>
               <i className="bi bi-person" />
               <span className="hiddentext"> Profile</span>
             </a>
           </Link>
         </div>
-
-        <div className="sidebarright ">
-          <div className="wrapper">
-            <div className="right-col">
-              {data && data.length > 0 ? (
-                data.map((item, index) => (
-                  <div className="profile-card" key={index}>
-                    <div className="profile-pic">
-                      {item.picture ? (
-                        <Image
-                          src={`data:image/jpeg;base64,${item.picture}`}
-                          className={"post-image"}
-                          alt=""
-                          layout="responsive"
-                          width="100%"
-                          height="100%"
-                        />
-                      ) : (
-                        <Image src={logo} alt="" />
-                      )}
-                      {/* <Image
-                        src={item.}
-                        alt="Picture of the author"
-                        placeholder="blur"
-                      /> */}
-                    </div>
-                    <div>
-                      <p className="username">{item.name}</p>
-                      <p className="sub-text">{item.subname}</p>
-                    </div>
-
-                    {/* <button className="action-btn">switch</button> */}
-                  </div>
-                ))
-              ) : (
-                <div div className="profile-card">
-                  <div className="profile-pic">
-                    <Image
-                      src={logo}
-                      alt="Picture of the author"
-                      placeholder="blur"
-                    />
-                  </div>
-                  <div>
-                    <p className="username">user</p>
-                    <p className="sub-text">user</p>
-                  </div>
-                </div>
-              )}
-              {/* <p className="suggestion-text">Suggestions for you</p>
-                <div className="profile-card">
-                  <div className="profile-pic">
-                    <Image
-                      src={logo}
-                      alt="Picture of the author"
-                      placeholder="blur"
-                    />
-                  </div>
-
-                  <div>
-                    <p className="username">User</p>
-                    <p className="sub-text">followed by user</p>
-                  </div>
-                  <button className="action-btn">follow</button>
-                </div> */}
-              <Link href={"/Profile"}>
-                <a className={router.pathname == "/Profile" ? "active" : ""}>
-                  <i className="bi bi-person" />
-                  <span className="hiddentext"> Profile</span>
-                </a>
-              </Link>
-              <Link href={"/Setting"}>
-                <a className={router.pathname == "/Setting" ? "active" : ""}>
-                  <i className="bi bi-gear-wide" />
-                  <span className="hiddentext"> Setting</span>
-                </a>
-              </Link>
-              <Link href={"/Bookmark"}>
-                <a className={router.pathname == "/Bookmark " ? "active" : ""}>
-                  <i className="bi bi-bookmark" />
-                  <span className="hiddentext"> Bookmark</span>
-                </a>
-              </Link>
-              <Link href={"/Logout"}>
-                <a className={router.pathname == "/Logout" ? "active" : ""}>
-                  <i className="bi bi-box-arrow-right" />
-                  <span className="hiddentext"> Logout</span>
-                </a>
-              </Link>
-            </div>
-          </div>
-
-          <p>© 2022 INSTAGRAM FROM WINTER</p>
-        </div>
-
-        <div className="topnav">
-          <Link href={"/"}>
-            <a className={router.pathname == "/" ? "active" : ""}>
-              <Image
-                src={logofull}
-                alt="Picture of the author"
-                width="100%"
-                height="38px"
-                placeholder="blur"
-              />
-            </a>
-          </Link>
-
-          <Link href={"/Notification"}>
-            <a className={router.pathname == "/" ? "active split" : "split"}>
-              <i className="bi bi-heart"></i>
-            </a>
-          </Link>
-        </div>
         <>{children}</>
-        {/* <div className="content center">
-          <h2>Responsive Sidebar Example</h2>
-          <p>
-            This example use media queries to transform the sidebar to a top
-            navigation bar when the screen size is 700px or less.
-          </p>
-          <p>
-            We have also added a media query for screens that are 400px or less,
-            which will vertically stack and center the navigation links.
-          </p>
-          <h3>Resize the browser window to see the effect.</h3>
-        </div> */}
       </main>
     </div>
-    // <div className='min-h-screen flex flex-col'>
-    //   <header className='bg-purple-200 sticky top-0 h-14 flex justify-center items-center font-semibold uppercase'>
-    //     Next.js sidebar menu
-    //   </header>
-    //   <div className='flex flex-col md:flex-row flex-1'>
-    //     <aside className='bg-fuchsia-100 w-full md:w-60'>
-    //       <nav>
-    //         <ul>
-    //           {menuItems.map(({ href, title }) => (
-    //             <li className='m-2' key={title}>
-    //               <Link href={href}>
-    //                 <a
-    //                   className={`flex p-2 bg-fuchsia-200 rounded hover:bg-fuchsia-400 cursor-pointer ${
-    //                     router.asPath === href && 'bg-fuchsia-600 text-white'
-    //                   }`}
-    //                 >
-    //                   {title}
-    //                 </a>
-    //               </Link>
-    //             </li>
-    //           ))}
-    //         </ul>
-    //       </nav>
-    //     </aside>
-    //     <main className='flex-1'>{children}</main>
-    //   </div>
-    // </div>
   );
 }

@@ -5,11 +5,13 @@ import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
 
 export default function Notification() {
+  const url_v1 = process.env.NEXT_PUBLIC_API_URL_V1;
+  const url_v2 = process.env.NEXT_PUBLIC_API_URL_V2;
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    Poster();
+    Profile();
     // sendPostRequest();
   }, []);
 
@@ -23,13 +25,18 @@ export default function Notification() {
     );
   if (!data) return <p>No profile data</p>;
 
-  const Poster = async () => {
-    setLoading(true);
+  const Profile = async () => {
     try {
-      const resp = await axios.get("http://localhost:4000/poster");
-      // console.log(resp.data);
-      setData(resp.data);
-      setLoading(false);
+      const token = localStorage.getItem("token");
+      const resp = await axios.get(url_v2 + "profile", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      if (resp.data.status !== 200) {
+        window.location.href = "/login";
+      }
+      setData(resp.data.data)
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -71,18 +78,18 @@ export default function Notification() {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">User</th>
+                <th scope="col">Email</th>
+                <th scope="col">Description</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item, index) => (
                 <tr key={index}>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                  <th scope="row">{index+1}</th>
+                  <td>{item.fullName}</td>
+                  <td>{item.Email}</td>
+                  <td>1</td>
                 </tr>
               ))}
             </tbody>

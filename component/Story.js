@@ -135,15 +135,98 @@ export default function Story() {
           <div className="wrapper">
             <div className="left-col">
               <div className="status-wrapper">
-                <button type="button">
+
+                <button type="button" style={{border:"0px"}}>
                   <div className=" status-card">
                     <div className="profile-pic">
                       <Image src={logo} alt="" draggable="false" />
                     </div>
-                    <p className="username pmb ">user_name_1</p>
+                    <p className="username pmb ">username</p>
                   </div>
                 </button>
-                <div className="status-card">
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                <button type="button" style={{border:"0px"}}>
+                  <div className=" status-card">
+                    <div className="profile-pic">
+                      <Image src={logo} alt="" draggable="false" />
+                    </div>
+                    <p className="username pmb ">username</p>
+                  </div>
+                </button>
+                
+                
+                {/* <div className="status-card">
                   <div className="profile-pic">
                     <Image src={logo} alt="" />
                   </div>
@@ -160,79 +243,7 @@ export default function Story() {
                     <Image src={logo} alt="" />
                   </div>
                   <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
-                <div className="status-card">
-                  <div className="profile-pic">
-                    <Image src={logo} alt="" />
-                  </div>
-                  <p className="username pmb">user_name_3</p>
-                </div>
+                </div> */}
 
                 {/* // +5 more status card elements. */}
               </div>

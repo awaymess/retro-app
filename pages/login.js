@@ -43,9 +43,9 @@ export default function Login() {
       .post("http://localhost:3001/api/v1/register", data)
       .then((response) => {
         console.log(response);
-        if (response.status === 200) {
+        if (response.status === 201) {
           //   router.push("/login");
-          router.push("/login");
+          window.location.href = "/login";
         }
       })
       .catch((error) => {
@@ -207,6 +207,7 @@ export default function Login() {
                   className="loginbnt"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop"
+                  data-bs-backdrop="false"
                 >
                   Login
                 </button>
@@ -217,6 +218,7 @@ export default function Login() {
                   className="loginbnt"
                   data-bs-toggle="modal"
                   data-bs-target="#staticBackdrop1"
+                  data-bs-backdrop="false"
                 >
                   Register
                 </button>
@@ -240,11 +242,12 @@ export default function Login() {
         <div
           className="modal"
           id="staticBackdrop"
+          data-bs-backdrop="false"
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-dialog modal-dialog-centered ">
             <div className="modal-content">
               <div className="card text-center border-0">
                 <div className="card-header" style={bntyel}>
@@ -298,6 +301,7 @@ export default function Login() {
         <div
           className="modal"
           id="staticBackdrop1"
+          data-bs-backdrop="false"
           tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"

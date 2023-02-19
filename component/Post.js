@@ -4,40 +4,70 @@ import axios from "axios";
 import logo from "../public/instagram-logo-2022_freelogovectors.net_.png";
 import Image from "next/image";
 import dayjs from "dayjs";
-import base64 from "base-64";
+import et from "../public/empty.png";
 
 export default function Post() {
-  const [isLoading, setLoading] = useState(false);
+  const url_v1 = process.env.NEXT_PUBLIC_API_URL_V1;
+  const url_v2 = process.env.NEXT_PUBLIC_API_URL_V2;
   const [data, setData] = useState([]);
+
+  const [isLoading, setLoading] = useState(false);
   const [profile, setProfile] = useState([]);
   const [imageSrc, setImageSrc] = useState(null);
-  // const [name, setName] = useState("away");
+  const [id, setID] = useState("");
+  const [postes, setPostes] = useState("");
+  const [comments, setComment] = useState("");
 
-  const [comments, setComment] = useState({
-    name: "away",
-    comment: "",
-  });
+  const [like, setLike] = useState("");
+  const [liked, setLiked] = useState("");
 
-  const [likes, setlikes] = useState({
-    name: "away",
-  });
+  const [isClicked, setIsClicked] = useState(true);
 
-  // function cammentChangeValue(e) {
-  //   const { name, value } = e.target;
-  //   console.log(value);
-  //   setAddUsers((prev) => {
-  //     return {
-  //       ...prev,
-  //       [name]: value,
-  //     };
-  //   });
-  // }
+  const [myLike, setMyLike] = useState([]);
 
   useEffect(() => {
     Posts();
     Profile();
+    setLoading(true);
+    Getlike();
+    GetlikeAll();
     // sendPostRequest();
   }, []);
+
+  const handleClickLike = (e) => {
+    setIsClicked(!isClicked);
+    let like = +isClicked;
+    let likedata = {
+      Status: like.toString(),
+      Name: e.id.toString(),
+    };
+
+    console.log(likedata);
+
+    const token = localStorage.getItem("token");
+    axios
+      .post(url_v2 + "like", likedata, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        GetlikeAll();
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // const buttonStyle = {
+  //   backgroundColor: "#fff",
+  //   color: isClicked ? "black" : "#e2264d",
+  //   padding: "12px 20px 10px 10px",
+  //   borderRadius: "5px",
+  //   border: "none",
+  //   cursor: "pointer",
+  // };
 
   if (isLoading)
     return (
@@ -47,154 +77,132 @@ export default function Post() {
         <div></div>
       </div>
     );
-  if (!data) return <p>No profile data</p>;
-
-  // const Poster = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const resp = await axios.get("http://localhost:3001/api/v2/getPost");
-  //     console.log(resp.data.data);
-  //     setData(resp.data.data);
-  //     // setData(resp.data.date);
-
-  //     var d = Date(Date.now());
-  //     var a = d.toString();
-  //     console.log(a);
-
-  //     setLoading(false);
-  //   } catch (err) {
-  //     // Handle Error Here
-  //     console.error(err);
-  //   }
-  // };
+  // if (!data) return <p>No profile data</p>;
 
   const Profile = async () => {
-    setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const resp = await axios.get("http://localhost:3001/api/v2/profile", {
+      const resp = await axios.get(url_v2 + "profile", {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
-      // console.log(resp.data.data);
-      // console.log(resp);
-      // Convert response to an array if it is not already an array
-      const dataArray = Array.isArray(resp.data.data)
-        ? resp.data.data
-        : [resp.data.data];
-      setProfile(dataArray);
-
-      // var d = Date(Date.now());
-      // var a = d.toString();
-      // console.log(Date(Date.now()).format("DD MMM YYYY H:mma"));
-
-      setLoading(false);
     } catch (err) {
+      if (err.response.status === 401) {
+        window.location.href = "/login";
+      }
       // Handle Error Here
+      console.error(err.response.status);
       console.error(err);
     }
+    setLoading(false);
   };
 
   const Posts = async () => {
-    setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const resp = await axios.get("http://localhost:3001/api/v2/posts", {
+      const resp = await axios.get(url_v2 + "posts", {
         headers: {
           Authorization: "Bearer " + token,
         },
       });
-      // console.log(resp.data.data);
-      // console.log(resp);
-      // Convert response to an array if it is not already an array
-      const dataArray = Array.isArray(resp.data.data)
-        ? resp.data.data
-        : [resp.data.data];
-      setData(dataArray);
-
-      setLoading(false);
+      // const dataArray = Array.isArray(resp.data.data)
+      //   ? resp.data.data
+      //   : [resp.data.data];
+      // setData(resp.data.data);
+      console.log(resp.data.data);
+      setData(resp.data.data);
     } catch (err) {
       // Handle Error Here
       console.error(err);
     }
   };
 
-  const sendComment = async (e) => {
-    // e.preventDefault();
+  function Getlike() {
+    let liked = {
+      post: "6",
+    };
+    console.log("liked", liked.toString());
 
-    var data = {
-      id: e._id,
-      comments: [
-        {
-          name: comments.name,
-          comment: comments.comment,
+    const token = localStorage.getItem("token");
+
+    axios
+      .post(url_v2 + "likePost", liked, {
+        headers: {
+          Authorization: "Bearer " + token,
         },
-      ],
-    };
+      })
+      // setLikes
+      .then((response) => {
+        // console.log(response.data.data.status);
+        setLike(response.data.data.status);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    try {
-      const resp = await axios.put(
-        "http://localhost:3001/api/v2/getPost",
-        data
-      );
+  function GetlikeAll() {
+    console.log("liked", liked.toString());
 
-      window.location.href = "/";
-      // Poster();
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  };
+    const token = localStorage.getItem("token");
 
-  const sendLike = async (e) => {
-    // e.preventDefault();
-    var data = {
-      id: e._id,
-      like: [
-        {
-          name: likes.name,
-          status: 1,
-          checkinEnabled: true,
+    axios
+      .get(url_v2 + "likePost", {
+        headers: {
+          Authorization: "Bearer " + token,
         },
-      ],
-    };
+      })
+      // setLikes
+      .then((response) => {
+        // console.log("response.dataAllLike", response.data.data);
+        setMyLike(response.data.data ? response.data.data : []);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    try {
-      const resp = await axios.put("http://localhost:4000/poster/like", data);
-      // window.location.href = "/";
-      // Poster();
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
+  let Delpost = {
+    id: id,
   };
-
-  const sendUnLike = async (e) => {
+  function DelPost(e) {
     // e.preventDefault();
-    // console.log(e)
-    var data = {
-      id: e._id,
-      name: likes.name,
-    };
-    // console.log(data);
-
-    try {
-      const resp = await axios.put(
-        "http://localhost:4000/poster/del-like",
-        data
-      );
-      // window.location.href = "/";
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
+    const token = localStorage.getItem("token");
+    axios
+      .post(url_v2 + "Delpost", Delpost, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  let Commented = {
+    Fullname: postes,
+    Comment: comments.comment,
   };
 
-  // var newArray = data.filter(function (el) {
-  //   return el.like ;
-  // });
-  // console.log(newArray);
+  function Comments(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    axios
+      .post(url_v2 + "comment", Commented, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <>
@@ -337,77 +345,168 @@ export default function Post() {
 
   }`}
       </style>
-      {data.map((item, index) => (
-        <div className="content" key={index}>
-          <div className="wrapper">
-            <div className="left-col">
-              <div className="post">
-                <div className="info">
-                  <div className="user">
-                    <div className="profile-pic">
-                      <Image src={logo} alt="" />
+
+      {data && data.length > 0 ? (
+        data.map((item, index) => (
+          <div className="content" key={index}>
+            <div>
+              <div className="wrapper">
+                <div className="left-col">
+                  <div className="post">
+                    <div className="info">
+                      <div className="user">
+                        <div className="profile-pic">
+                          {!item.Profile ? (
+                            <Image
+                              src={`data:image/jpeg;base64,${item.profile}`}
+                              className={"post-image"}
+                              alt=""
+                              layout="responsive"
+                              width="100%"
+                              height="100%"
+                            />
+                          ) : (
+                            <Image src={logo} alt="" />
+                          )}
+                        </div>
+                        <p className="username">{item.Fullname}</p>
+                      </div>
+                      {/* <img src="img/option.PNG" className="options" alt="" /> */}
+                      {/* <i className="bi bi-three-dots save icon"></i> */}
+
+                      <div className="btn-group dropstart">
+                        <i
+                          className="bi bi-three-dots save icon"
+                          type="button"
+                          id="dropdownMenu2"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          onClick={() => {
+                            setID(item.id.toString());
+                          }}
+                        ></i>
+
+                        <ul
+                          className="dropdown-menu "
+                          aria-labelledby="dropdownMenu2"
+                        >
+                          <li>
+                            {/* <input
+                                  type="button"
+                                  className="dropdown-item"
+                                  placeholder="Add a comment"
+                                  onClick={DelPost}
+                                  value={item.id}
+                                  // onClick={(e) => {
+                                  //   setID(e.target.value);
+                                  //   DelPost();
+                                  // }}
+                                /> */}
+
+                            <button
+                              type="button"
+                              className="dropdown-item"
+                              placeholder="Add a comment"
+                              onClick={DelPost}
+                            >
+                              Delete
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+
+                      {/* <Image src={logo} alt="" /> */}
                     </div>
-                    <p className="username">{item.Uid}</p>
+                    {/* <Image src={logo} alt="" className="post-image" /> */}
+
+                    <Image
+                      src={`data:image/jpeg;base64,${item.picture}`}
+                      className={"post-image"}
+                      alt=""
+                      layout="responsive"
+                      width="100%"
+                      height="100%"
+                    />
+
+                    <div className="post-content">
+                      <div className="reaction-wrapper">
+                        <button
+                          style={{
+                            backgroundColor: "#fff",
+                            color:
+                              myLike.findIndex(
+                                (item1) => item1.post == item.id
+                              ) > -1
+                                ? "#e2264d"
+                                : "#000",
+                            padding: "12px 20px 10px 10px",
+                            borderRadius: "5px",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            handleClickLike(item);
+                          }}
+                        >
+                          {/* {isClicked ? "true" : "false"} */}
+                          <i className="bi bi-heart-fill"></i>
+                        </button>
+
+                        <i className="bi bi-chat icon"></i>
+                        <i className="bi bi-send icon"></i>
+                        <i className="bi bi-bookmark save icon"></i>
+                      </div>
+                      <p className="likes">{item.likes} likes</p>
+                      <p className="description">
+                        <span> {item.Fullname}</span>
+                        {item.comment.substring(0, 53)}
+                      </p>
+                      <p className="post-time">
+                        {dayjs(Date(item.CreatedAt)).format("DD MMM YYYY H:mm")}
+                        {/* {item.CreatedAt} */}
+                      </p>
+
+                      {/* <p className="post-time">2 minutes ago</p> */}
+                    </div>
+                    <div className="comment-wrapper">
+                      <i className="bi bi-send icon"></i>
+
+                      {/* <img src="img/smile.PNG" className="icon" alt="" /> */}
+                      <input
+                        type="text"
+                        className="comment-box"
+                        placeholder="Add a comment"
+                        onChange={(e) => {
+                          setComment({
+                            ...comments,
+                            ["comment"]: e.target.value,
+                          }),
+                            setPostes(item.id.toString());
+                        }}
+                      />
+                      <button className="comment-btn" onClick={Comments}>
+                        post
+                      </button>
+                    </div>
                   </div>
-                  {/* <img src="img/option.PNG" className="options" alt="" /> */}
-                  <i className="bi bi-three-dots save icon"></i>
-                  {/* <Image src={logo} alt="" /> */}
-                </div>
-                {/* <Image src={logo} alt="" className="post-image" /> */}
-                <Image
-                  src={`data:image/jpeg;base64,${item.Picture}`}
-                  className={"post-image"}
-                  alt=""
-                  layout="responsive"
-                  width="100%"
-                  height="100%"
-                  objectFit="cover"
-                />
-                <div className="post-content">
-                  <div className="reaction-wrapper">
-                    <i className="bi bi-heart icon"></i>
-
-                    <i className="bi bi-chat icon"></i>
-
-                    <i className="bi bi-send icon"></i>
-
-                    <i className="bi bi-bookmark save icon"></i>
-
-                    {/* <img src="img/like.PNG" className="icon" alt="" />
-                    <img src="img/comment.PNG" className="icon" alt="" />
-                    <img src="img/send.PNG" className="icon" alt="" />
-                    <img src="img/save.PNG" className="save icon" alt="" /> */}
-                  </div>
-                  <p className="likes">1,012 likes</p>
-                  <p className="description">
-                    <span>{item.Uid} </span> {item.Comment}
-                  </p>
-                  <p className="post-time">
-                    {dayjs(Date(item.CreatedAt)).format("DD MMM YYYY H:mm")}
-                    {/* {item.CreatedAt} */}
-                  </p>
-
-                  {/* <p className="post-time">2 minutes ago</p> */}
-                </div>
-                <div className="comment-wrapper">
-                  <i className="bi bi-send icon"></i>
-
-                  {/* <img src="img/smile.PNG" className="icon" alt="" /> */}
-                  <input
-                    type="text"
-                    className="comment-box"
-                    placeholder="Add a comment"
-                    onChange={(e) =>
-                      setComment({ ...comments, ["comment"]: e.target.value })
-                    }
-                  />
-                  <button className="comment-btn">post</button>
                 </div>
               </div>
             </div>
           </div>
+        ))
+      ) : (
+        <div className="content">
+          <div className="wrapper">
+            <div className="left-col">
+              <div className="post"></div>
+              <h3 style={{ fontSize: "16px", textAlign: "center" }}>Empty</h3>
+            </div>
+          </div>
         </div>
-      ))}
+      )}
+      <div className="container">
+        <Image src={et} width="100%" height="75px" />
+      </div>
     </>
   );
 }
