@@ -129,12 +129,12 @@ export default function Layout({ children }) {
             text-decoration: none;
           }
           .sidebarright a.active {
-            background-color: #04AA6D;
+            background-color: #502b17;
             color: white;
           }
           .sidebarright a:hover:not(.active) {
-            background-color: #555;
-            color: white;
+            background-color: #fff5de;
+            color: #502b17;
           }
 
           .topnav {
@@ -163,7 +163,7 @@ export default function Layout({ children }) {
           
           .topnav a.split {
             float: right;
-            // background-color: #04AA6D;
+            // background-color: #502b17;
             color: black;
             padding: 12px;
           }

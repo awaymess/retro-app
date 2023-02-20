@@ -53,6 +53,7 @@ export default function Post() {
       })
       .then((response) => {
         GetlikeAll();
+        Posts();
         console.log(response);
       })
       .catch((error) => {
@@ -176,6 +177,7 @@ export default function Post() {
         },
       })
       .then((response) => {
+        Posts();
         console.log(response);
       })
       .catch((error) => {
@@ -184,9 +186,9 @@ export default function Post() {
   }
   let Commented = {
     Fullname: postes,
-    Comment: comments.comment,
+    Comment: comments,
   };
-
+  // Comment: comments.comment,
   function Comments(e) {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -197,6 +199,8 @@ export default function Post() {
         },
       })
       .then((response) => {
+        Posts();
+        setComment(" ");
         console.log(response);
       })
       .catch((error) => {
@@ -356,7 +360,7 @@ export default function Post() {
                     <div className="info">
                       <div className="user">
                         <div className="profile-pic">
-                          {!item.Profile ? (
+                          {item.profile ? (
                             <Image
                               src={`data:image/jpeg;base64,${item.profile}`}
                               className={"post-image"}
@@ -456,11 +460,47 @@ export default function Post() {
                         <i className="bi bi-send icon"></i>
                         <i className="bi bi-bookmark save icon"></i>
                       </div>
-                      <p className="likes">{item.likes} likes</p>
+
+                      <p className="likes">{item.Like ? item.Like.length : "0"} likes</p>
+
                       <p className="description">
                         <span> {item.Fullname}</span>
                         {item.comment.substring(0, 53)}
                       </p>
+                      {/* {item.commented[0].comments} */}
+
+                      {item.commented && item.commented.length > 0 ? (
+                        item.commented.map((itemcomment, index) => (
+                          <p className="description" key={index}>
+                            <span> {itemcomment.name}</span>
+                            {itemcomment.comments.substring(0, 53)}
+                          </p>
+
+                        ))
+                      ) : (
+                        <></>
+                        // <div className="content">
+                        //   <div className="wrapper">
+                        //     <div className="left-col">
+                        //       <div className="post"></div>
+                        //       <h3
+                        //         style={{
+                        //           fontSize: "16px",
+                        //           textAlign: "center",
+                        //         }}
+                        //       >
+                        //         Empty
+                        //       </h3>
+                        //     </div>
+                        //   </div>
+                        // </div>
+                      )}
+
+                      {/* 
+                      <p className="description">
+                        <span> {item.Fullname}</span>
+                        {item.comment.substring(0, 53)}
+                      </p> */}
                       <p className="post-time">
                         {dayjs(Date(item.CreatedAt)).format("DD MMM YYYY H:mm")}
                         {/* {item.CreatedAt} */}
@@ -476,12 +516,14 @@ export default function Post() {
                         type="text"
                         className="comment-box"
                         placeholder="Add a comment"
+                        value={comments}
                         onChange={(e) => {
-                          setComment({
-                            ...comments,
-                            ["comment"]: e.target.value,
-                          }),
-                            setPostes(item.id.toString());
+                          setComment(e.target.value),
+                            // setComment({
+                            //   ...comments,
+                            //   ["comment"]: e.target.value,
+                            // }),
+                          setPostes(item.id.toString());
                         }}
                       />
                       <button className="comment-btn" onClick={Comments}>
